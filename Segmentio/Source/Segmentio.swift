@@ -39,8 +39,8 @@ open class Segmentio: UIView {
         didSet {
             if selectedSegmentioIndex != oldValue {
                 reloadSegmentio()
-                valueDidChange?(self, selectedSegmentioIndex)
             }
+            valueDidChange?(self, selectedSegmentioIndex)
         }
     }
 
