@@ -330,7 +330,6 @@ open class Segmentio: UIView {
     public func reloadSegmentio() {
         segmentioCollectionView?.collectionViewLayout.invalidateLayout()
         segmentioCollectionView?.reloadData()
-        guard selectedSegmentioIndex != -1 else { return }
         scrollToItemAtContext()
         moveShapeLayerAtContext()
     }
@@ -422,6 +421,9 @@ open class Segmentio: UIView {
     
     fileprivate func moveShapeLayer(_ shapeLayer: CAShapeLayer, startPoint: CGPoint, endPoint: CGPoint,
                                     animated: Bool = false) {
+        let animated = animated &&
+            selectedSegmentioIndex != -1 &&
+            shapeLayer.path?.boundingBox.width ?? 1 > 1
         var endPointWithVerticalSeparator = endPoint
         let isLastItem = selectedSegmentioIndex + 1 == segmentioItems.count
         endPointWithVerticalSeparator.x = endPoint.x - (isLastItem ? 0 : 1)
